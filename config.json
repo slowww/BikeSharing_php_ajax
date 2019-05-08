@@ -1,0 +1,6 @@
+{
+    "server": "localhost",
+    "db": "bikesharing",
+    "user": "root",
+    "pw":""
+}

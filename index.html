@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"
+            integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU="
+            crossorigin="anonymous"></script>
+
+    <meta charset="UTF-8">
+    <title>BIKE SHARING</title>
+</head>
+<body>
+
+<h3>Visualizzare le bici attualmente in uso, da quali utenti e presso quale stazione sono state prelevate:</h3>
+<button onclick="p3b()">PUNTO 3B</button>
+<div id="divop"></div>
+
+</body>
+</html>
+
+<script>
+    //lista
+    function p3b() {
+        $.ajax({
+            type: "GET",
+            url: "http://localhost/Schionato/op.php",
+            responseType: "json",
+            //dataType: "json",
+            success:
+                function(data,status,jqXHR)
+                {   console.log(data);
+                    var json = JSON.parse(data);
+
+                    json.id_bike_fk + " " + json.id_ut_fk + " " + json.id_staz_fk;
+                },
+            error: function()
+            {
+                alert("Errore nell'inserimento.");
+            }
+        });
+    }
+
+    function myFunction(arr) {
+        var out = "";
+        var i;
+        out +="<br><table id='oplist' border='1'><tr><td>ID BIKE</td><td>ID UTENTE</td><td>ID STAZIONE</td></tr>";
+        for(i = 0; i < arr.length; i++) {
+            out += "<tr><td>"+arr[i].id_bike_fk+"</td><td>"+arr[i].id_ut_fk+"</td><td>"+arr[i].id_staz_fk+"</td></tr>"
+        }
+        out+="</table>";
+        document.getElementById("divop").innerHTML = out;
+    }
+</script>
